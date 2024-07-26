@@ -1,0 +1,59 @@
+---
+title: "EnsemblGenomes"
+author: 
+  - name: Jacques Serizay
+    affiliation:
+    - Institut Pasteur
+    email: jacques.serizay@pasteur.fr
+output: 
+  BiocStyle::html_document:
+    self_contained: yes
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    code_folding: show
+date: "`r doc_date()`"
+package: "`r pkg_ver('EnsemblGenomes')`"
+vignette: >
+  %\VignetteIndexEntry{test}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    width = 180, 
+    crop = NULL
+)
+```
+
+# Introduction 
+
+# Installation
+
+`EnsemblGenomes` package can be installed from Bioconductor using the following
+command: 
+
+```{r eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("EnsemblGenomes")
+```
+
+# `list_ensembl_*` functions
+
+Four functions are available: 
+
+- `list_ensembl_files()`
+- `list_ensembl_species()`
+- `list_ensembl_taxa()`
+- `list_ensembl_releases()`
+
+# Session info
+
+```{r}
+sessionInfo()
+```

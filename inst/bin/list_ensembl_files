@@ -1,0 +1,11 @@
+#!/usr/bin/env r
+
+if (is.null(argv) | length(argv)<1) {
+    cat("Usage: list_ensembl_files <species>\n")
+    q()
+}
+
+EnsemblGenomes::list_ensembl_files(argv[1]) |> 
+    as.data.frame() |> 
+    print(n = 'all', row.names = FALSE)
+

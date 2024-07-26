@@ -1,0 +1,44 @@
+Package: EnsemblGenomes
+Title: Rapid access to Ensembl-provided genome reference and annotation files
+Description: EnsemblGenomes scrapes [ensembl.org] and [ensemblgenomes.org] FTP 
+    servers to locate genome reference fasta files and genome annotation 
+    gff3 files provided for species supported by Ensembl. As of July 2024, 
+    this corresponds to more than 300 vertebrate, 300 metazoa, 200 protists, 
+    150 plants, 1,000 fungi and 30,000 bacteria species. Rather than supporting
+    `BiocFileCache`, EnsemblGenomes simply intends to retrieve and list URL 
+    of fasta and gff3 files across Ensembl releases as a plain data frame. 
+Version: 0.98.0
+Date: 2024-07-26
+Authors@R: 
+    person("Jacques", "Serizay", , "jacquesserizay@gmail.com", role = c("aut", "cre"))
+License: MIT + file LICENSE
+URL: https://github.com/js2264/EnsemblGenomes
+BugReports: https://github.com/js2264/EnsemblGenomes/issues
+biocViews: 
+    Software, 
+    Sequencing
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 4.3.0)
+Imports: 
+    httr, 
+    rvest, 
+    glue, 
+    tibble, 
+    dplyr, 
+    stringr, 
+    cli
+Suggests: 
+    littler,
+    knitr,
+    quarto,
+    rmarkdown,
+    sessioninfo,
+    testthat (>= 3.0.0),
+    BiocStyle,
+    RefManageR
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+LazyData: false

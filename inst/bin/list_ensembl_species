@@ -1,0 +1,10 @@
+#!/usr/bin/env r
+
+if (is.null(argv) | length(argv)<1) {
+    cat("Usage: list_ensembl_species [group]\n")
+    q()
+}
+
+EnsemblGenomes::list_ensembl_species(argv[1]) |> 
+    as.data.frame() |> 
+    print(n = 'all', row.names = FALSE)
