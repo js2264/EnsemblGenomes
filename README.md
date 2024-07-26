@@ -1,12 +1,15 @@
 # EnsemblGenomes
 
-`EnsemblGenomes` scrapes [ensembl.org] and [ensemblgenomes.org] FTP 
+`EnsemblGenomes` scrapes [ensembl.org](ensembl.org) and [ensemblgenomes.org](ensemblgenomes.org) FTP 
 servers to locate genome reference fasta files and genome annotation 
-gff3 files provided for species supported by Ensembl. As of July 2024, 
-this corresponds to more than 300 vertebrate, 300 metazoa, 200 protists, 
-150 plants, 1,000 fungi and 30,000 bacteria species. Rather than supporting
-`BiocFileCache`, EnsemblGenomes simply intends to retrieve and list URL 
-of fasta and gff3 files across Ensembl releases as a plain data frame. 
+gff3 files provided for species supported by Ensembl. 
+
+As of July 2024, this apprach gives access to more than 300 vertebrate, 300 metazoa, 200 protists, 
+150 plants, 1,000 fungi and 30,000 bacteria species.
+
+Rather than supporting `BiocFileCache`-based file caching, EnsemblGenomes 
+simply intends to retrieve and list URL of fasta and gff3 files across Ensembl
+releases as a plain data frame. 
 
 ## Installation 
 
@@ -58,15 +61,17 @@ list_ensembl_files('amphiprion_percula')
 - Install `littler` and `EnsemblGenomes` in `R`
 
 ```sh
-Rscript -e "BiocManager::install(c('littler', 'EnsemblGenomes'))"
+Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
+Rscript -e 'pak::pkg_install("eddelbuettel/littler")'
+Rscript -e 'pak::pkg_install("js2264/EnsemblGenomes")'
 ```
 
 - Make symlinks to `r` (from `littler`) and to `list_ensembl_files` (from `EnsemblGenomes`)
 
 ```sh
-ln -s `Rscript -e "cat(.libPaths()[1])"`/littler/bin/r ~/.local/bin/
-ln -s `Rscript -e "cat(.libPaths()[1])"`/EnsemblGenomes/bin/list_ensembl_files ~/.local/bin/
-ln -s `Rscript -e "cat(.libPaths()[1])"`/EnsemblGenomes/bin/list_ensembl_species ~/.local/bin/
+sudo ln -s `Rscript -e "cat(.libPaths()[1])"`/littler/bin/r /usr/local/bin/
+sudo ln -s `Rscript -e "cat(.libPaths()[1])"`/EnsemblGenomes/bin/list_ensembl_files /usr/local/bin/
+sudo ln -s `Rscript -e "cat(.libPaths()[1])"`/EnsemblGenomes/bin/list_ensembl_species /usr/local/bin/
 ```
 
 - Enjoy :)
