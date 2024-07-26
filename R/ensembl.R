@@ -75,34 +75,27 @@ list_ensembl_species <- function(
     taxon <- .check_taxon(taxon)
     release <- .check_release(release, taxon)
 
+    df <- httr::GET(.get_fasta_path(taxon, release)) |> 
+        .extract_ftp_listing() |> 
+        dplyr::rename(species = Name, date = `Last modified`) |> 
+        dplyr::mutate(species = stringr::str_replace(species, '/$', '')) |> 
+        dplyr::mutate(
+            taxon = taxon, 
+            collection = NA, 
+            release = release
+        ) |> 
+        dplyr::relocate(date, .after = release) 
+    
     if (taxon == "vertebrate") {
-        df <- httr::GET(.get_fasta_path(taxon, release)) |> 
-            .extract_ftp_listing() |> 
-            dplyr::rename(species = Name, date = `Last modified`) |> 
-            dplyr::mutate(species = stringr::str_replace(species, '/$', '')) |> 
-            dplyr::mutate(
-                release = release, 
-                taxon = taxon, 
-                collection = NA, 
-                url = glue::glue("https://ensembl.org/{species}/Info/Annotation#genebuild"), 
-                url_status = NULL
-            ) |> 
-            dplyr::relocate(c(species, date), .after = collection) |> 
+        df <- mutate(df, 
+            url = glue::glue("https://ensembl.org/{species}/Info/Annotation#genebuild")
+        ) |> dplyr::relocate(url, .after = species) |> 
             dplyr::filter(species != 'ancestral_alleles')
     } 
     else {
-        df <- httr::GET(.get_fasta_path(taxon, release)) |> 
-            .extract_ftp_listing() |> 
-            dplyr::rename(species = Name, date = `Last modified`) |> 
-            dplyr::mutate(species = stringr::str_replace(species, '/$', '')) |> 
-            dplyr::mutate(
-                release = release, 
-                taxon = taxon, 
-                collection = NA, 
-                url = glue::glue("https://{taxon}.ensembl.org/{species}/Info/Index"), 
-                url_status = NULL
-            ) |> 
-            dplyr::relocate(c(species, date), .after = collection)
+        df <- mutate(df, 
+            url = glue::glue("https://{taxon}.ensembl.org/{species}/Info/Index")
+        ) |> dplyr::relocate(url, .after = species) 
     }
     
     collections <- grep('_collection', df$species, value = TRUE)
@@ -118,8 +111,7 @@ list_ensembl_species <- function(
                     release = release, 
                     taxon = taxon, 
                     collection = col, 
-                    url = glue::glue("https://{taxon}.ensembl.org/{species}/Info/Index"), 
-                    url_status = NULL
+                    url = glue::glue("https://{taxon}.ensembl.org/{species}/Info/Index")
                 ) |> 
                 dplyr::relocate(c(species, date), .after = collection)
         }) |> do.call(rbind, args = _)

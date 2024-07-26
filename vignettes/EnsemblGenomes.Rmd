@@ -31,6 +31,14 @@ knitr::opts_chunk$set(
 
 # Introduction 
 
+`EnsemblGenomes` scrapes [ensembl.org] and [ensemblgenomes.org] FTP 
+servers to locate genome reference fasta files and genome annotation 
+gff3 files provided for species supported by Ensembl. As of July 2024, 
+this corresponds to more than 300 vertebrate, 300 metazoa, 200 protists, 
+150 plants, 1,000 fungi and 30,000 bacteria species. Rather than supporting
+`BiocFileCache`, EnsemblGenomes simply intends to retrieve and list URL 
+of fasta and gff3 files across Ensembl releases as a plain data frame. 
+
 # Installation
 
 `EnsemblGenomes` package can be installed from Bioconductor using the following
@@ -51,6 +59,18 @@ Four functions are available:
 - `list_ensembl_species()`
 - `list_ensembl_taxa()`
 - `list_ensembl_releases()`
+
+```{r}
+library(EnsemblGenomes)
+
+list_ensembl_taxa()
+
+list_ensembl_releases(taxon = 'vertebrate')
+
+list_ensembl_species('vertebrate', release = 'release-100')
+
+list_ensembl_files('amphiprion_percula', release = 'release-100')
+```
 
 # Session info
 

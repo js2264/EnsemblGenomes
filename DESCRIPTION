@@ -7,7 +7,7 @@ Description: EnsemblGenomes scrapes [ensembl.org] and [ensemblgenomes.org] FTP
     150 plants, 1,000 fungi and 30,000 bacteria species. Rather than supporting
     `BiocFileCache`, EnsemblGenomes simply intends to retrieve and list URL 
     of fasta and gff3 files across Ensembl releases as a plain data frame. 
-Version: 0.98.0
+Version: 0.98.1
 Date: 2024-07-26
 Authors@R: 
     person("Jacques", "Serizay", , "jacquesserizay@gmail.com", role = c("aut", "cre"))
@@ -31,7 +31,6 @@ Imports:
     stringr, 
     cli
 Suggests: 
-    littler,
     knitr,
     quarto,
     rmarkdown,
